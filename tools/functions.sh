@@ -1,0 +1,52 @@
+#!/bin/bash
+
+###################################
+## PARSE JSON
+###################################
+
+# Thanks to http://stackoverflow.com/a/26655887
+# EXAMPLE :
+# _value=$(bashutilities_parse_json '{"test":"ok","value":"nok"}' 'test');
+
+function bashutilities_parse_json() {
+    echo "${1}" | \
+    sed -e 's/[{}]/''/g' | \
+    sed -e 's/", "/'\",\"'/g' | \
+    sed -e 's/" ,"/'\",\"'/g' | \
+    sed -e 's/" , "/'\",\"'/g' | \
+    sed -e 's/","/'\"---SEPARATOR---\"'/g' | \
+    awk -F=':' -v RS='---SEPARATOR---' "\$1~/\"$2\"/ {print}" | \
+    sed -e "s/\"$2\"://" | \
+    tr -d "\n\t" | \
+    sed -e 's/\\"/"/g' | \
+    sed -e 's/\\\\/\\/g' | \
+    sed -e 's/^[ \t]*//g' | \
+    sed -e 's/^"//'  -e 's/"$//'
+}
+
+###################################
+## SED FOR LINUX / OSX
+###################################
+
+# EXAMPLE :
+# bashutilities_sed "s/before/after/g" "file.txt";
+
+function bashutilities_sed() {
+    sed -i.bak "${1}" "${2}";
+    rm "${2}.bak";
+}
+
+###################################
+## STRING TO SLUG
+###################################
+
+# EXAMPLE :
+# _slug=$(bashutilities_string_to_slug "Kévin");
+
+function bashutilities_string_to_slug() {
+    _slug="$(echo -e "${1}" | tr -d '[[:space:]]' | tr [:upper:] [:lower:])";
+    _slug="$(echo ${_slug} | iconv -f utf8 -t ascii//TRANSLIT)";
+    _slug="$(echo ${_slug} | tr -cd '[[:alnum:]]._-')";
+    echo "${_slug}";
+}
+
