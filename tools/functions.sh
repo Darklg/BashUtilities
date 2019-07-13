@@ -1,6 +1,9 @@
 #!/bin/bash
 
 ###################################
+## FUNCTIONS V 0.2.0
+###################################
+
 ## PARSE JSON
 ###################################
 
@@ -24,7 +27,6 @@ function bashutilities_parse_json() {
     sed -e 's/^"//'  -e 's/"$//'
 }
 
-###################################
 ## SED FOR LINUX / OSX
 ###################################
 
@@ -36,7 +38,6 @@ function bashutilities_sed() {
     rm "${2}.bak";
 }
 
-###################################
 ## STRING TO SLUG
 ###################################
 
@@ -50,3 +51,25 @@ function bashutilities_string_to_slug() {
     echo "${_slug}";
 }
 
+## GET USER VAR Y / N
+###################################
+
+# EXAMPLE :
+# _myvaractive=$(bashutilities_get_yn "- Is it active?" 'n');
+# $1 : Question
+# $2 : Default value
+function bashutilities_get_yn() {
+    default_choice="[Y/n]";
+    if [[ ${2} == 'n' ]]; then
+        default_choice="[y/N]";
+    fi;
+    while true; do
+        read -p "${1} ${default_choice} : " yn
+        case $yn in
+            [1YyOo]* ) yn="y"; break;;
+            [0Nn]* ) yn="n"; break;;
+            * ) yn=${2}; break;;
+        esac
+    done
+    echo "${yn}";
+}
