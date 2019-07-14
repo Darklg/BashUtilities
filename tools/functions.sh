@@ -1,7 +1,11 @@
 #!/bin/bash
 
 ###################################
-## FUNCTIONS V 0.2.0
+## FUNCTIONS V 0.3.0
+###################################
+
+###################################
+## GET VALUES
 ###################################
 
 ## PARSE JSON
@@ -27,30 +31,6 @@ function bashutilities_parse_json() {
     sed -e 's/^"//'  -e 's/"$//'
 }
 
-## SED FOR LINUX / OSX
-###################################
-
-# EXAMPLE :
-# bashutilities_sed "s/before/after/g" "file.txt";
-
-function bashutilities_sed() {
-    sed -i.bak "${1}" "${2}";
-    rm "${2}.bak";
-}
-
-## STRING TO SLUG
-###################################
-
-# EXAMPLE :
-# _slug=$(bashutilities_string_to_slug "Kévin");
-
-function bashutilities_string_to_slug() {
-    _slug="$(echo -e "${1}" | tr -d '[[:space:]]' | tr [:upper:] [:lower:])";
-    _slug="$(echo ${_slug} | iconv -f utf8 -t ascii//TRANSLIT)";
-    _slug="$(echo ${_slug} | tr -cd '[[:alnum:]]._-')";
-    echo "${_slug}";
-}
-
 ## GET USER VAR Y / N
 ###################################
 
@@ -72,4 +52,57 @@ function bashutilities_get_yn() {
         esac
     done
     echo "${yn}";
+}
+
+###################################
+## TEXT TRANSFORMATION
+###################################
+
+## STRING TO SLUG
+###################################
+
+# EXAMPLE :
+# _slug=$(bashutilities_string_to_slug "Kévin");
+
+function bashutilities_string_to_slug() {
+    _slug="$(echo -e "${1}" | tr -d '[[:space:]]' | tr [:upper:] [:lower:])";
+    _slug="$(echo ${_slug} | iconv -f utf8 -t ascii//TRANSLIT)";
+    _slug="$(echo ${_slug} | tr -cd '[[:alnum:]]._-')";
+    echo "${_slug}";
+}
+
+## TITLECASE
+###################################
+
+function bashutilities_titlecase(){
+    sttr="${1}";
+    sttr="$(tr '[:lower:]' '[:upper:]' <<< ${sttr:0:1})${sttr:1}";
+    echo "${sttr}";
+}
+
+###################################
+## FILES
+###################################
+
+## SED FOR LINUX / OSX
+###################################
+
+# EXAMPLE :
+# bashutilities_sed "s/before/after/g" "file.txt";
+
+function bashutilities_sed() {
+    sed -i.bak "${1}" "${2}";
+    rm "${2}.bak";
+}
+
+## BURY COPY
+###################################
+
+# Create path and copy
+# https://stackoverflow.com/a/1534494
+# EXAMPLE :
+# bashutilities_bury_copy originpath/file.txt new/sub/folder/file.txt
+
+function bashutilities_bury_copy() {
+    mkdir -p `dirname $2` && cp "$1" "$2";
 }
