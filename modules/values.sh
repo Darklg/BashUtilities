@@ -1,8 +1,30 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.3.0
+## GET VALUES V 0.4.0
 ###################################
+
+###################################
+## SEARCH AND EXTRACT FROM FILE
+###################################
+
+# EXAMPLE :
+# before text after
+# _value=$(bashutilities_search_extract_file "\# before" "after" "values.sh");
+
+function bashutilities_search_extract_file(){
+    # Get first line containing the two items
+    _variable=$(sed "/$1/,/$2/!d;/$2/q" $3);
+    # Remove first part
+    _variable=${_variable/$1/};
+    # Remove last part
+    _variable=${_variable/$2/};
+    # Trim result
+    _variable="$(echo -e "${_variable}" | tr '\n' ' ')";
+    _variable="${_variable// /}";
+    # Return result
+    echo "${_variable}";
+}
 
 ## PARSE JSON
 ###################################
