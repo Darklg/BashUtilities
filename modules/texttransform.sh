@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## TEXT TRANSFORMATION V 0.3.0
+## TEXT TRANSFORMATION V 0.3.1
 ###################################
 
 ## STRING TO SLUG
