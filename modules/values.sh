@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.4.1
+## GET VALUES V 0.5.0
 ###################################
 
 ###################################
@@ -70,4 +70,20 @@ function bashutilities_get_yn() {
         esac
     done
     echo "${yn}";
+}
+
+## GET USER VAR
+###################################
+
+# EXAMPLE :
+# _myvar=$(bashutilities_get_user_var "- What is your var?" "default");
+# $1 : Question
+# $2 : Default value
+function bashutilities_get_user_var() {
+    _myvalue="${2}";
+    read -p "${1} [${2}] : " _myvalue;
+    if [[ "${_myvalue}" == '' ]]; then
+        _myvalue="${2}";
+    fi;
+    echo "${_myvalue}";
 }
