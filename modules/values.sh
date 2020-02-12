@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.5.0
+## GET VALUES V 0.6.0
 ###################################
 
 ###################################
@@ -87,3 +87,38 @@ function bashutilities_get_user_var() {
     fi;
     echo "${_myvalue}";
 }
+
+
+## GET A RANDOM STRING
+###################################
+
+# EXAMPLE :
+# _myvar=$(bashutilities_rand_string 3);
+# $1 : Number of chars
+
+function bashutilities_rand_string() {
+    # Initial value : current time
+    _myvalue=$(date +%s%N);
+
+    # Get wanted number of chars
+    case $1 in
+        ''|*[!0-9]*) _nbchar=10 ;;
+        *) _nbchar=$1 ;;
+    esac;
+
+    # Use md5 if available
+    if [ -x "$(command -v md5)" ]; then
+        _myvalue=$(echo "${_myvalue}" | md5);
+    fi
+    # Use sha256sum if available
+    if [ -x "$(command -v sha256sum)" ]; then
+        _myvalue=$(echo "${_myvalue}" | sha256sum);
+    fi
+
+    # Cut to the desired number of chars
+    _myvalue=$(echo "${_myvalue}" | head -c ${_nbchar});
+
+    # Return value
+    echo "${_myvalue}";
+}
+
