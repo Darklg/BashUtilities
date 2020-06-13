@@ -17,3 +17,18 @@ function bashutilities_submodule_or_install(){
         rm -rf "${filename}/".git*;
     fi;
 }
+
+###################################
+## Get version
+###################################
+
+function bashutilities_get_version(){
+    local TAG=$(git describe --abbrev=0 --tags);
+    local SEMVER_REGEX="^([0-9]*).([0-9]*).([0-9]*)$";
+    if [[ "${TAG}" =~ ${SEMVER_REGEX} ]]; then
+        echo "${TAG}";
+    else
+        echo "";
+    fi;
+}
+
