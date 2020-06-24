@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## FILES V 0.4.0
+## FILES V 0.5.0
 ###################################
 
 ## SED FOR LINUX / OSX
@@ -32,8 +32,19 @@ function bashutilities_bury_copy() {
 
 # EXAMPLE :
 # bashutilities_add_after_marker '##MARKER##' 'texttoinsert' file.txt
-function bashutilities_add_before_marker() {
+function bashutilities_add_after_marker() {
     file_content=$(cat "${3}");
     file_content=${file_content//"${1}"/"${1}"$'\n'"${2}"};
+    echo "${file_content}" > "${3}";
+}
+
+## Add before marker
+###################################
+
+# EXAMPLE :
+# bashutilities_add_before_marker '##MARKER##' 'texttoinsert' file.txt
+function bashutilities_add_before_marker() {
+    file_content=$(cat "${3}");
+    file_content=${file_content//"${1}"/"${2}"$'\n'"${1}"};
     echo "${file_content}" > "${3}";
 }
