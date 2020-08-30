@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## MESSAGES V 0.1.1
+## MESSAGES V 0.1.2
 ###################################
 
 function bashutilities_message() {
@@ -12,6 +12,9 @@ function bashutilities_message() {
     CLR_DEF=' \033[0m'; # RESET
 
     MSG_WARN="/!\\ ${1} /!\\";
+    if [[ "${3}" == 'nowarn' ]];then
+        MSG_WARN="${1}";
+    fi;
 
     case "${2}" in
         'error')
