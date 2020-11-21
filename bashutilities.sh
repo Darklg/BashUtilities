@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Bash Utilities v 0.12.2
+## Bash Utilities v 0.13.0
 ###################################
 
 _SOURCEDIR_BASHUTILITIES="$( dirname "${BASH_SOURCE[0]}" )/";

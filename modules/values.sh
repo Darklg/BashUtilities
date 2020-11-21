@@ -1,10 +1,34 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.6.0
+## GET VALUES V 0.7.0
 ###################################
 
+## EXTRACT PHP CONSTANT FROM FILE
 ###################################
+
+# EXAMPLE :
+# before text after
+# _value=$(bashutilities_search_extract_file__php_constant "DB_HOST" "wp-config.php");
+
+function bashutilities_search_extract_file__php_constant(){
+    # Extract variable
+    _variable=$(bashutilities_search_extract_file "${1}'," ");" "${2}");
+
+    # Remove Quotes
+    _first_char=${_variable:0:1};
+    if [[ "${_first_char}" == "'" || "${_first_char}" == '"' ]];then
+        _variable="${_variable:1}";
+    fi;
+    _last_char=${_variable: -1};
+    if [[ "${_last_char}" == "'" || "${_last_char}" == '"' ]];then
+        _variable="${_variable%?}";
+    fi;
+
+    # Return result
+    echo "${_variable}";
+}
+
 ## SEARCH AND EXTRACT FROM FILE
 ###################################
 
@@ -21,6 +45,7 @@ function bashutilities_search_extract_file(){
     _variable=${_variable/$2/};
     # Trim result
     _variable="$(echo -e "${_variable}" | tr '\n' ' ')";
+    _variable="$(echo -e "${_variable}" | tr '\r' ' ')";
     _variable="${_variable// /}";
     # Return result
     echo "${_variable}";
