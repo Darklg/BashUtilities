@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.7.0
+## GET VALUES V 0.7.1
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -44,9 +44,7 @@ function bashutilities_search_extract_file(){
     # Remove last part
     _variable=${_variable/$2/};
     # Trim result
-    _variable="$(echo -e "${_variable}" | tr '\n' ' ')";
-    _variable="$(echo -e "${_variable}" | tr '\r' ' ')";
-    _variable="${_variable// /}";
+    _variable=$(bashutilities_trim "${_variable}");
     # Return result
     echo "${_variable}";
 }

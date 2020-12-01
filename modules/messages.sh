@@ -32,7 +32,7 @@ function bashutilities_message() {
     esac
 }
 
-# echo $(bashutilities_message 'Test' 'error');
-# echo $(bashutilities_message 'Test' 'notice');
-# echo $(bashutilities_message 'Test' 'success');
-# echo $(bashutilities_message 'Test' 'warning');
+# bashutilities_message 'Test' 'error';
+# bashutilities_message 'Test' 'notice';
+# bashutilities_message 'Test' 'success';
+# bashutilities_message 'Test' 'warning';
