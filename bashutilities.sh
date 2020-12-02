@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Bash Utilities v 0.14.0
+## Bash Utilities v 0.15.0
 ###################################
 
 _SOURCEDIR_BASHUTILITIES="$( dirname "${BASH_SOURCE[0]}" )/";
@@ -15,3 +15,5 @@ _SOURCEDIR_BASHUTILITIES="$( dirname "${BASH_SOURCE[0]}" )/";
 . "${_SOURCEDIR_BASHUTILITIES}/modules/texttransform.sh";
 . "${_SOURCEDIR_BASHUTILITIES}/modules/values.sh";
 . "${_SOURCEDIR_BASHUTILITIES}/modules/git.sh";
+
+# . "${_SOURCEDIR_BASHUTILITIES}/modules/stop.sh";
