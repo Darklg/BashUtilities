@@ -32,3 +32,11 @@ function bashutilities_get_version(){
     fi;
 }
 
+###################################
+## Commit all
+###################################
+
+function bashutilities_commit_all(){
+    git add -A
+    git commit --no-verify -m "${1}" --quiet;
+}
