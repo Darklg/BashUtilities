@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.7.1
+## GET VALUES V 0.8.0
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -79,10 +79,15 @@ function bashutilities_parse_json() {
 # _myvaractive=$(bashutilities_get_yn "- Is it active?" 'n');
 # $1 : Question
 # $2 : Default value
+# $3 : Forced value if not empty
 function bashutilities_get_yn() {
     default_choice="[Y/n]";
     if [[ ${2} == 'n' ]]; then
         default_choice="[y/N]";
+    fi;
+    if [ ! -z "${3}" ]; then
+        echo "${3}";
+        return ;
     fi;
     while true; do
         read -p "${1} ${default_choice} : " yn
