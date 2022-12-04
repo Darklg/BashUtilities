@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.8.0
+## GET VALUES V 0.8.1
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -107,8 +107,13 @@ function bashutilities_get_yn() {
 # _myvar=$(bashutilities_get_user_var "- What is your var?" "default");
 # $1 : Question
 # $2 : Default value
+# $3 : Forced value if not empty
 function bashutilities_get_user_var() {
     _myvalue="${2}";
+    if [ ! -z "${3}" ]; then
+        echo "${3}";
+        return ;
+    fi;
     read -p "${1} [${2}] : " _myvalue;
     if [[ "${_myvalue}" == '' ]]; then
         _myvalue="${2}";
