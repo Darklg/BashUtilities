@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.8.1
+## GET VALUES V 0.8.2
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -57,19 +57,23 @@ function bashutilities_search_extract_file(){
 # _value=$(bashutilities_parse_json '{"test":"ok","value":"nok"}' 'test');
 
 function bashutilities_parse_json() {
-    echo "${1}" | \
-    sed -e 's/[{}]/''/g' | \
-    sed -e 's/", "/'\",\"'/g' | \
-    sed -e 's/" ,"/'\",\"'/g' | \
-    sed -e 's/" , "/'\",\"'/g' | \
-    sed -e 's/","/'\"---SEPARATOR---\"'/g' | \
-    awk -F=':' -v RS='---SEPARATOR---' "\$1~/\"$2\"/ {print}" | \
-    sed -e "s/\"$2\"://" | \
-    tr -d "\n\t" | \
-    sed -e 's/\\"/"/g' | \
-    sed -e 's/\\\\/\\/g' | \
-    sed -e 's/^[ \t]*//g' | \
-    sed -e 's/^"//'  -e 's/"$//'
+    if ! [ -x "$(command -v jq)" ]; then
+        echo "${1}" | \
+        sed -e 's/[{}]/''/g' | \
+        sed -e 's/", "/'\",\"'/g' | \
+        sed -e 's/" ,"/'\",\"'/g' | \
+        sed -e 's/" , "/'\",\"'/g' | \
+        sed -e 's/","/'\"---SEPARATOR---\"'/g' | \
+        awk -F=':' -v RS='---SEPARATOR---' "\$1~/\"$2\"/ {print}" | \
+        sed -e "s/\"$2\"://" | \
+        tr -d "\n\t" | \
+        sed -e 's/\\"/"/g' | \
+        sed -e 's/\\\\/\\/g' | \
+        sed -e 's/^[ \t]*//g' | \
+        sed -e 's/^"//'  -e 's/"$//'
+    else
+        echo "${1}" | jq -r ".${2}";
+    fi;
 }
 
 ## GET USER VAR Y / N
