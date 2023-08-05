@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.8.2
+## GET VALUES V 0.8.3
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -14,6 +14,10 @@
 function bashutilities_search_extract_file__php_constant(){
     # Extract variable
     _variable=$(bashutilities_search_extract_file "${1}'," ");" "${2}");
+    # Search constant with quotes
+    if [[ "${_variable}" == "" ]];then
+        _variable=$(bashutilities_search_extract_file "${1}\"," ");" "${2}");
+    fi;
 
     # Remove Quotes
     _first_char=${_variable:0:1};

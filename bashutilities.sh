@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Bash Utilities v 0.17.1
+## Bash Utilities v 0.18.0
 ###################################
 
 _SOURCEDIR_BASHUTILITIES="$( cd $(dirname "${BASH_SOURCE[0]}") && pwd )/";
