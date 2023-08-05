@@ -1,4 +1,4 @@
-name: PHP Lint
+name: Functions test
 
 on:
   push:
@@ -8,6 +8,8 @@ on:
 
 jobs:
   test-job:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Run test script
         run: ./bashutilities-test.js
