@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Stop V 0.1.0
+## Stop V 0.1.1
 ## Remove old functions
 ###################################
 
@@ -21,3 +21,5 @@ unset -f bashutilities_parse_json;
 unset -f bashutilities_get_yn;
 unset -f bashutilities_get_user_var;
 unset -f bashutilities_rand_string;
+unset -f bashutilities_commit_all;
+unset -f bashutilities_launch_tests;

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ###################################
-## Bash Utilities v 0.16.2
+## Bash Utilities v 0.17.0
 ###################################
 
-_SOURCEDIR_BASHUTILITIES="$( dirname "${BASH_SOURCE[0]}" )/";
+_SOURCEDIR_BASHUTILITIES="$( cd $(dirname "${BASH_SOURCE[0]}") && pwd )/";
 
 ###################################
 ## Load all modules

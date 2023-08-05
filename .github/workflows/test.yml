@@ -1,0 +1,14 @@
+name: PHP Lint
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test-job:
+    steps:
+      - name: Run test script
+        run: ./bashutilities-test.js
+        shell: bash
