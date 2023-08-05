@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Test V 0.1.0
+## Test V 0.1.1
 ## Test functions
 ###################################
 
@@ -15,6 +15,7 @@ function bashutilities_launch_tests(){
     _test_str=$(cat "test-file.txt");
     if [[ "${_test_str}" != 'loremtest' ]];then
         echo "- bashutilities_sed does not work";
+        exit 1;
     else
         echo "- bashutilities_sed seems to work fine";
     fi;
@@ -30,6 +31,7 @@ function bashutilities_launch_tests(){
     _test_str_control=$(cat "${_SOURCEDIR_BASHUTILITIES}/tests/markers-after.txt");
     if [[ "${_test_str}" != "${_test_str_control}" ]];then
         echo "- bashutilities markers does not work";
+        exit 1;
     else
         echo "- bashutilities markers seems to work fine";
     fi;
