@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.8.3
+## GET VALUES V 0.8.4
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -41,6 +41,7 @@ function bashutilities_search_extract_file__php_constant(){
 # _value=$(bashutilities_search_extract_file "before" "after" "values.sh");
 
 function bashutilities_search_extract_file(){
+    local _variable;
     # Get first line containing the two items
     _variable=$(sed "/$1/,/$2/!d;/$2/q" $3);
     # Cut until first part
@@ -89,6 +90,7 @@ function bashutilities_parse_json() {
 # $2 : Default value
 # $3 : Forced value if not empty
 function bashutilities_get_yn() {
+    local default_choice;
     default_choice="[Y/n]";
     if [[ ${2} == 'n' ]]; then
         default_choice="[y/N]";
@@ -117,6 +119,8 @@ function bashutilities_get_yn() {
 # $2 : Default value
 # $3 : Forced value if not empty
 function bashutilities_get_user_var() {
+    local _myvalue;
+
     _myvalue="${2}";
     if [ ! -z "${3}" ]; then
         echo "${3}";
@@ -129,7 +133,6 @@ function bashutilities_get_user_var() {
     echo "${_myvalue}";
 }
 
-
 ## GET A RANDOM STRING
 ###################################
 
@@ -138,6 +141,8 @@ function bashutilities_get_user_var() {
 # $1 : Number of chars
 
 function bashutilities_rand_string() {
+    local _myvalue;
+
     # Initial value : current time
     _myvalue=$(date +%s%N);
 
@@ -156,10 +161,6 @@ function bashutilities_rand_string() {
         _myvalue=$(echo "${_myvalue}" | sha256sum);
     fi
 
-    # Cut to the desired number of chars
-    _myvalue=$(echo "${_myvalue}" | head -c ${_nbchar});
-
-    # Return value
-    echo "${_myvalue}";
+    # Cut to the desired number of chars & return;
+    echo "${_myvalue}" | head -c "${_nbchar}";
 }
-

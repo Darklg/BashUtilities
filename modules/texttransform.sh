@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## TEXT TRANSFORMATION V 0.4.1
+## TEXT TRANSFORMATION V 0.4.2
 ###################################
 
 ## STRING TO SLUG
@@ -11,6 +11,7 @@
 # _slug=$(bashutilities_string_to_slug "Kévin");
 
 function bashutilities_string_to_slug() {
+    local _slug;
     _slug="$(echo -e "${1}" | tr -d '[[:space:]]' | tr [:upper:] [:lower:])";
     _slug="$(echo ${_slug} | iconv -f utf8 -t ascii//TRANSLIT)";
     _slug="$(echo ${_slug} | tr -cd '[[:alnum:]]._-')";
