@@ -2,4 +2,4 @@
 
 Utilities for Bash / Shell
 
-![Test workflow]($https://github.com/Darklg/BashUtilities/actions/workflows/js.yml/badge.svg)
+[![Functions test](https://github.com/Darklg/BashUtilities/actions/workflows/test.yml/badge.svg 'Functions test')](https://github.com/Darklg/BashUtilities/actions)
