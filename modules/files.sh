@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## FILES V 0.5.1
+## FILES V 0.6.0
 ###################################
 
 ## SED FOR LINUX / OSX
@@ -49,4 +49,26 @@ function bashutilities_add_before_marker() {
     file_content=$(cat "${3}");
     file_content=${file_content//"${1}"/"${2}"$'\n'"${1}"};
     echo "${file_content}" > "${3}";
+}
+
+###################################
+## Insert after first marker
+###################################
+
+# EXAMPLE :
+# bashutilities_add_after_first_marker '##MARKER##' 'texttoinsert' file.txt
+function bashutilities_add_after_first_marker() {
+    local pattern=$1
+    local text_to_insert=$2
+    local file=$3
+    local temp_file=$(mktemp)
+
+    awk -v pattern="$pattern" -v text="$text_to_insert" '
+    !found && $0 ~ pattern {
+        print $0;
+        print text;
+        found=1;
+        next
+    }
+    { print }' "$file" > "$temp_file" && mv "$temp_file" "$file"
 }

@@ -1,10 +1,11 @@
 #!/bin/bash
 
 ###################################
-## STOP V 0.1.3
+## STOP V 0.1.4
 ## Remove old functions
 ###################################
 
+unset -f bashutilities_add_after_first_marker;
 unset -f bashutilities_add_after_marker;
 unset -f bashutilities_add_before_marker;
 unset -f bashutilities_bury_copy;
