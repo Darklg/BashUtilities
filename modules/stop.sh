@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ###################################
-## STOP V 0.1.4
-## Remove old functions
+## STOP V 0.1.5
+## Remove unused functions
 ###################################
 
 unset -f bashutilities_add_after_first_marker;
@@ -13,6 +13,7 @@ unset -f bashutilities_commit_all;
 unset -f bashutilities_get_user_var;
 unset -f bashutilities_get_version;
 unset -f bashutilities_get_yn;
+unset -f bashutilities_insert_at_beginning;
 unset -f bashutilities_launch_tests;
 unset -f bashutilities_launch_tests__compare;
 unset -f bashutilities_launch_tests__different;

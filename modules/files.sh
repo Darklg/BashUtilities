@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## FILES V 0.6.0
+## FILES V 0.7.0
 ###################################
 
 ## SED FOR LINUX / OSX
@@ -71,4 +71,16 @@ function bashutilities_add_after_first_marker() {
         next
     }
     { print }' "$file" > "$temp_file" && mv "$temp_file" "$file"
+}
+
+###################################
+## Insert at beginning
+###################################
+
+# EXAMPLE :
+# bashutilities_insert_at_beginning 'texttoinsert' file.txt
+function bashutilities_insert_at_beginning(){
+    local text_to_insert="${1}";
+    local file="${2}";
+    echo -e "${text_to_insert}$(cat "${file}")" > "${file}";
 }

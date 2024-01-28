@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Test V 0.3.1
+## TEST V 0.3.2
 ###################################
 
 bashutilities_launch_tests__equals(){
@@ -47,6 +47,7 @@ function bashutilities_launch_tests(){
     bashutilities_add_after_first_marker '##DOUBLEMARKER##' 'texttoinsert' "${_test_file}"
     bashutilities_sed "s/##MARKER##//g"  "${_test_file}";
     bashutilities_sed "s/##DOUBLEMARKER##//g"  "${_test_file}";
+    bashutilities_insert_at_beginning 'beginningtext' "${_test_file}";
     _test_str=$(cat "${_test_file}");
     _test_str_control=$(cat "${_SOURCEDIR_BASHUTILITIES}/tests/markers-after.txt");
     bashutilities_launch_tests__equals "${_test_str}" "${_test_str_control}" "bashutilities markers";
