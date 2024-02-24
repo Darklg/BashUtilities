@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## TEXT TRANSFORMATION V 0.4.3
+## TEXT TRANSFORMATION V 0.5.0
 ###################################
 
 ## STRING TO SLUG
@@ -46,3 +46,30 @@ function bashutilities_trim(){
     echo "${_variable}";
 }
 
+## Version Bump
+###################################
+
+function bashutilities_version_bump() {
+    local _version="${1}"
+    local _upgrade_type="${2}"
+
+    # Split version
+    local _version_part_major=$(echo "${_version}" | cut -d "." -f 1)
+    local _version_part_minor=$(echo "${_version}" | cut -d "." -f 2)
+    local _version_part_patch=$(echo "${_version}" | cut -d "." -f 3)
+
+    # Upgrade Increment part
+    if [[ "${_upgrade_type}" == 'major' ]]; then
+        _version_part_major=$((_version_part_major + 1))
+        _version_part_minor="0";
+        _version_part_patch="0";
+    fi
+    if [[ "${_upgrade_type}" == 'minor' ]]; then
+        _version_part_minor=$((_version_part_minor + 1))
+        _version_part_patch="0";
+    fi
+    if [[ "${_upgrade_type}" == 'patch' ]]; then
+        _version_part_patch=$((_version_part_patch + 1))
+    fi
+    echo "${_version_part_major}.${_version_part_minor}.${_version_part_patch}"
+}

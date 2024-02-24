@@ -53,6 +53,13 @@ function bashutilities_launch_tests(){
     bashutilities_launch_tests__equals "${_test_str}" "${_test_str_control}" "bashutilities markers";
     rm "tests-markers-before.txt";
 
+    # VERSION
+    bashutilities_launch_tests__equals $(bashutilities_version_bump "2.0.0" "major") "3.0.0" "bashutilities_version_bump";
+    bashutilities_launch_tests__equals $(bashutilities_version_bump "2.0.0" "minor") "2.1.0" "bashutilities_version_bump";
+    bashutilities_launch_tests__equals $(bashutilities_version_bump "2.0.0" "patch") "2.0.1" "bashutilities_version_bump";
+    bashutilities_launch_tests__equals $(bashutilities_version_bump "9.10.1" "minor") "9.11.0" "bashutilities_version_bump";
+    bashutilities_launch_tests__equals $(bashutilities_version_bump "10.10.1" "major") "11.0.0" "bashutilities_version_bump";
+
     # SLUG
     _test_str=$(bashutilities_string_to_slug "KéviN");
     _test_str_control="kevin";
