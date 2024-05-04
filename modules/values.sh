@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## GET VALUES V 0.8.4
+## GET VALUES V 0.8.5
 ###################################
 
 ## EXTRACT PHP CONSTANT FROM FILE
@@ -12,11 +12,23 @@
 # _value=$(bashutilities_search_extract_file__php_constant "DB_HOST" "wp-config.php");
 
 function bashutilities_search_extract_file__php_constant(){
+    local _COPY_FILE;
+
+    # Create a copy of the file
+    _COPY_FILE="${2}.tmp";
+    cp "${2}" "${_COPY_FILE}";
+
+    # Remove comments
+    bashutilities_sed '/^\s*\/\//d' "${_COPY_FILE}";
+    bashutilities_sed '/^\s*#/d' "${_COPY_FILE}";
+    bashutilities_sed '/^\s*\/\*/d' "${_COPY_FILE}";
+
     # Extract variable
-    _variable=$(bashutilities_search_extract_file "${1}'," ");" "${2}");
+    _variable=$(bashutilities_search_extract_file "${1}'," ");" "${_COPY_FILE}");
+
     # Search constant with quotes
     if [[ "${_variable}" == "" ]];then
-        _variable=$(bashutilities_search_extract_file "${1}\"," ");" "${2}");
+        _variable=$(bashutilities_search_extract_file "${1}\"," ");" "${_COPY_FILE}");
     fi;
 
     # Remove Quotes
@@ -28,6 +40,9 @@ function bashutilities_search_extract_file__php_constant(){
     if [[ "${_last_char}" == "'" || "${_last_char}" == '"' ]];then
         _variable="${_variable%?}";
     fi;
+
+    # Remove file copy
+    rm "${_COPY_FILE}";
 
     # Return result
     echo "${_variable}";
