@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## FILES V 0.7.0
+## FILES V 0.8.0
 ###################################
 
 ## SED FOR LINUX / OSX
@@ -83,4 +83,27 @@ function bashutilities_insert_at_beginning(){
     local text_to_insert="${1}";
     local file="${2}";
     echo -e "${text_to_insert}$(cat "${file}")" > "${file}";
+}
+
+###################################
+## Find file in a parent folder
+###################################
+
+# EXAMPLE :
+# bashutilities_find_file_in_parent_folder 'file.txt'
+function bashutilities_find_file_in_parent_folder(){
+    local _CURRENT_DIR=$(pwd);
+    if [[ -f "${_CURRENT_DIR}/${1}" ]]; then
+        echo "${_CURRENT_DIR}";
+        return 0;
+    fi;
+    local _PARENT_DIR=$(dirname "${_CURRENT_DIR}");
+    while [[ "${_PARENT_DIR}" != '/' ]]; do
+        if [[ -f "${_PARENT_DIR}/${1}" ]]; then
+            echo "${_PARENT_DIR}";
+            return 0;
+        fi;
+        _PARENT_DIR=$(dirname "${_PARENT_DIR}");
+    done;
+    echo "";
 }

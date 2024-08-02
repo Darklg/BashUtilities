@@ -93,6 +93,10 @@ function bashutilities_launch_tests(){
     _test_str_control="test"
     bashutilities_launch_tests__equals "${_test_str}" "${_test_str_control}" "bashutilities_search_extract_file #2";
 
+    # Find file in parent folder
+    _test_file=$(bashutilities_find_file_in_parent_folder 'bashutilities-test.sh');
+    bashutilities_launch_tests__equals "${_test_file}/" "${_SOURCEDIR_BASHUTILITIES}" "bashutilities_find_file_in_parent_folder";
+
     # Extract from PHP
     _test_file="${_SOURCEDIR_BASHUTILITIES}/tests/search-file.php";
     _test_str_control="lorem"
