@@ -1,6 +1,9 @@
 #!/bin/bash
 
 ###################################
+## Git v 0.4.0
+###################################
+
 ## Submodule or install
 ###################################
 
@@ -18,7 +21,6 @@ function bashutilities_submodule_or_install(){
     fi;
 }
 
-###################################
 ## Get version
 ###################################
 
@@ -32,11 +34,26 @@ function bashutilities_get_version(){
     fi;
 }
 
-###################################
 ## Commit all
 ###################################
 
 function bashutilities_commit_all(){
     git add -A
     git commit --no-verify -m "${1}" --quiet;
+}
+
+## Update a repo to the latest version
+###################################
+
+function bashutilities_update_repo_to_latest_main(){
+    local current_dir=$(pwd)
+    cd "${1}";
+    git fetch --tags;
+    if [[ $(git rev-parse --abbrev-ref HEAD) != "main" ]]; then
+        git checkout master;
+        git checkout main;
+    fi
+    git pull origin --quiet;
+    git submodule update --init --recursive --quiet;
+    cd "${current_dir}";
 }
