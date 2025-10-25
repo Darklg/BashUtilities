@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## FILES V 0.8.0
+## FILES V 0.8.1
 ###################################
 
 ## SED FOR LINUX / OSX
@@ -106,4 +106,15 @@ function bashutilities_find_file_in_parent_folder(){
         _PARENT_DIR=$(dirname "${_PARENT_DIR}");
     done;
     echo "";
+}
+
+###################################
+## Get checksum of a folder path
+###################################
+
+# EXAMPLE :
+# bashutilities_get_folder_checksum 'folderpath'
+function bashutilities_get_folder_checksum(){
+    local folder_path="${1}";
+    echo "${folder_path}" | md5sum | awk '{ print $1 }';
 }
